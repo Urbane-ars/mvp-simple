@@ -12,11 +12,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
 
 public class UsersModel {
 
     private final DbHelper dbHelper;
 
+    @Inject
     public UsersModel(DbHelper dbHelper) {
         this.dbHelper = dbHelper;
     }

@@ -9,11 +9,14 @@ import com.example.simpleapp.common.UserTable;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class UsersPresenter {
 
     private UsersContactView view;
     private final UsersModel model;
 
+    @Inject
     public UsersPresenter(UsersModel model) {
         this.model = model;
     }
@@ -41,15 +44,15 @@ public class UsersPresenter {
     }
 
     public void add() {
-        UserData userData = view.getUserData();
-        if (TextUtils.isEmpty(userData.getName()) || TextUtils.isEmpty(userData.getEmail())) {
+        User user = view.getUser();
+        if (TextUtils.isEmpty(user.getName()) || TextUtils.isEmpty(user.getEmail())) {
             view.showToast(R.string.empty_values);
             return;
         }
 
         ContentValues cv = new ContentValues(2);
-        cv.put(UserTable.COLUMN.NAME, userData.getName());
-        cv.put(UserTable.COLUMN.EMAIL, userData.getEmail());
+        cv.put(UserTable.COLUMN.NAME, user.getName());
+        cv.put(UserTable.COLUMN.EMAIL, user.getEmail());
         view.showProgress();
         model.addUser(cv, new UsersModel.CompleteCallback() {
             @Override

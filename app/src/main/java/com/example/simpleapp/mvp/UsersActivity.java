@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.simpleapp.R;
 import com.example.simpleapp.common.User;
 import com.example.simpleapp.common.UserAdapter;
-import com.example.simpleapp.di.App;
-import com.example.simpleapp.di.AppContainer;
-
+import com.example.simpleapp.App;
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 public class UsersActivity extends AppCompatActivity implements UsersContactView{
@@ -27,23 +27,14 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
     private EditText editTextEmail;
     private ProgressDialog progressDialog;
 
-    private UsersPresenter presenter;
-
-
+    @Inject
+    UsersPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((App)getApplicationContext()).getApplicationComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
-
-        // with manual dependency injection
-        AppContainer appContainer = ((App) getApplication()).appContainer;
-        presenter = new UsersPresenter(appContainer.getUsersModel(this));
-
-        //      Without dependency injection
-        // dbHelper = new DbHelper(this);
-        // usersModel = new UsersModel(dbHelper);
-        // presenter = new UsersPresenter(usersModel);
 
         init();
     }
@@ -81,11 +72,11 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
         presenter.viewIsReady();
     }
 
-    public UserData getUserData() {
-        UserData userData = new UserData();
-        userData.setName(editTextName.getText().toString());
-        userData.setEmail(editTextEmail.getText().toString());
-        return userData;
+    public User getUser() {
+        User user = new User();
+        user.setName(editTextName.getText().toString());
+        user.setEmail(editTextEmail.getText().toString());
+        return user;
     }
 
     @Override
