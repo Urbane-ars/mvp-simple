@@ -1,10 +1,16 @@
 package com.example.simpleapp.common;
 
+import javax.inject.Inject;
+
 public class User {
 
     private long id;
     private String name;
     private String email;
+
+    @Inject
+    public User() {
+    }
 
     public long getId() {
         return id;

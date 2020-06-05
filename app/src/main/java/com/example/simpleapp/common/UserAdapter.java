@@ -14,10 +14,16 @@ import com.example.simpleapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     List<User> data = new ArrayList<>();
+
+    @Inject
+    public UserAdapter() {
+    }
 
     @Override
     public UserHolder onCreateViewHolder(ViewGroup parent, int viewType) {

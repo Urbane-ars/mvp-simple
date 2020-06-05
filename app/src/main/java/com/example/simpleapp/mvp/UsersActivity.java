@@ -21,14 +21,16 @@ import javax.inject.Inject;
 
 public class UsersActivity extends AppCompatActivity implements UsersContactView{
 
-    private UserAdapter userAdapter;
-
     private EditText editTextName;
     private EditText editTextEmail;
     private ProgressDialog progressDialog;
 
     @Inject
     UsersPresenter presenter;
+    @Inject
+    UserAdapter userAdapter;
+    @Inject
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,6 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        userAdapter = new UserAdapter();
 
         RecyclerView userList = findViewById(R.id.list);
         userList.setLayoutManager(layoutManager);
@@ -73,7 +74,6 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
     }
 
     public User getUser() {
-        User user = new User();
         user.setName(editTextName.getText().toString());
         user.setEmail(editTextEmail.getText().toString());
         return user;
