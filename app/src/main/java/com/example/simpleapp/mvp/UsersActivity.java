@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.simpleapp.R;
 import com.example.simpleapp.common.User;
 import com.example.simpleapp.common.UserAdapter;
-import com.example.simpleapp.App;
+import com.example.simpleapp.dagger.ActivityComponent;
+import com.example.simpleapp.dagger.ActivityModule;
+import com.example.simpleapp.dagger.DaggerActivityComponent;
+
 import java.util.List;
 
 import javax.inject.Inject;
-
 
 public class UsersActivity extends AppCompatActivity implements UsersContactView{
 
@@ -34,7 +36,11 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((App)getApplicationContext()).getApplicationComponent().inject(this);
+        ActivityComponent activityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(this))
+                .build();
+        activityComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
 
