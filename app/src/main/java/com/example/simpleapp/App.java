@@ -8,7 +8,7 @@ import com.example.simpleapp.dagger.DaggerAppComponent;
 
 
 public class App extends Application {
-    private static AppComponent appComponent;
+    private  AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -20,7 +20,7 @@ public class App extends Application {
                 .build();
     }
 
-   public AppComponent getApplicationComponent(){
+   public AppComponent getAppComponent(){
         return appComponent;
     }
 

@@ -6,15 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.simpleapp.common.UserTable;
 
-import javax.inject.Inject;
-
 
 public class DbHelper extends SQLiteOpenHelper {
 
     public static final String NAME = "mvpsample";
     public static final int VERSION = 1;
 
-    @Inject
     public DbHelper(Context context) {
         super(context, NAME, null, VERSION);
     }

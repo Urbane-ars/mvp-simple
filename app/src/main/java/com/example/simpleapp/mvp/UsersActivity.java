@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.simpleapp.App;
 import com.example.simpleapp.R;
 import com.example.simpleapp.common.User;
 import com.example.simpleapp.common.UserAdapter;
 import com.example.simpleapp.dagger.ActivityComponent;
-import com.example.simpleapp.dagger.ActivityModule;
 import com.example.simpleapp.dagger.DaggerActivityComponent;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
     protected void onCreate(Bundle savedInstanceState) {
         ActivityComponent activityComponent = DaggerActivityComponent
                 .builder()
-                .activityModule(new ActivityModule(this))
+                .appComponent(((App)getApplication()).getAppComponent())
                 .build();
         activityComponent.inject(this);
         super.onCreate(savedInstanceState);
