@@ -2,9 +2,9 @@ package com.example.simpleapp.dagger;
 
 import com.example.simpleapp.mvp.UsersActivity;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
-@Component(dependencies = AppComponent.class)
+@Subcomponent(modules = ActivityModule.class)
 @ActivityScope
 public interface ActivityComponent {
     void inject(UsersActivity activity);

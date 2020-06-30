@@ -15,7 +15,7 @@ import com.example.simpleapp.R;
 import com.example.simpleapp.common.User;
 import com.example.simpleapp.common.UserAdapter;
 import com.example.simpleapp.dagger.ActivityComponent;
-import com.example.simpleapp.dagger.DaggerActivityComponent;
+import com.example.simpleapp.dagger.ActivityModule;
 
 import java.util.List;
 
@@ -36,10 +36,7 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityComponent activityComponent = DaggerActivityComponent
-                .builder()
-                .appComponent(((App)getApplication()).getAppComponent())
-                .build();
+        ActivityComponent activityComponent = ((App)getApplication()).getAppComponent().activityComponent(new ActivityModule(this));
         activityComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
