@@ -8,24 +8,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Module
+@InstallIn(ApplicationComponent.class)
 public class AppModule {
-    private Context appContext;
-
-    public AppModule(Context appContext){
-        this.appContext = appContext;
-    }
 
     @Provides
     @Singleton
-    Context providesContext(){
-        return appContext;
-    }
-
-    @Provides
-    @Singleton
-    DbHelper providesDbHelper(Context context){
+    static DbHelper providesDbHelper(@ApplicationContext Context context){
         return new DbHelper(context);
     }
 }

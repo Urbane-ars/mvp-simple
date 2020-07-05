@@ -10,17 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.simpleapp.App;
 import com.example.simpleapp.R;
 import com.example.simpleapp.common.User;
 import com.example.simpleapp.common.UserAdapter;
-import com.example.simpleapp.dagger.ActivityComponent;
-import com.example.simpleapp.dagger.ActivityModule;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class UsersActivity extends AppCompatActivity implements UsersContactView{
 
     private EditText editTextName;
@@ -36,11 +36,8 @@ public class UsersActivity extends AppCompatActivity implements UsersContactView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityComponent activityComponent = ((App)getApplication()).getAppComponent().activityComponent(new ActivityModule(this));
-        activityComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
-
         init();
     }
 
